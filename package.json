@@ -5,11 +5,18 @@
   "repository": "git@github.com:oriechinedu/webauth-iii-challenge.git",
   "author": "Orie Chinedu <oriechinedu@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-error-bouncer": "^1.0.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
