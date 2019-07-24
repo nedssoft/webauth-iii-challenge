@@ -1,11 +1,11 @@
 const db = require('../../config/db');
 const { ErrorHandler } = require("express-error-bouncer");
 
-const createUser = userData => {
+const createUser = async userData => {
   try {
-    const user = db("users").insert(userData);
+    const user = await db("users").insert(userData);
     if (user) {
-      return user;
+      return find({id: user[0]});
     }
     throw new ErrorHandler(500, "Internal server error");
   } catch (error) {
