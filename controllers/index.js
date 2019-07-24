@@ -1,7 +1,7 @@
 const User = require('../data/models/users');
 const { ErrorHandler } = require("express-error-bouncer");
 const bcrypt = require("bcrypt");
-const { encode: getToken, decode } = require('../helpers/jwt')
+const { encode: getToken } = require('../helpers/jwt')
 
 const createNewUser = async (req, res, next ) => {
   try {
@@ -32,7 +32,6 @@ const loginUser = async (req, res, next) => {
       throw new ErrorHandler(401, "You shall not pass!");
     }
     const token = getToken({ _uuid: user.id});
-   
     const { password: pass, ...rest } = user;
     return res.status(200).json({
       user: {...rest, token },
@@ -43,7 +42,19 @@ const loginUser = async (req, res, next) => {
   }
 };
 
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.getUsers();
+    return res.status(200).json({
+      users,
+    });
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   createNewUser,
-  loginUser
+  loginUser,
+  getAllUsers
 };

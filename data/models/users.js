@@ -29,7 +29,7 @@ const find = async userData => {
 
 const getUsers = () => {
   try {
-    return db('users');
+    return db('users').select('id', 'username', 'department');
   } catch (error) {
     throw new ErrorHandler(500, error.message);
   }
