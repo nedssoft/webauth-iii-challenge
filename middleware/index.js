@@ -1,5 +1,7 @@
 const { ErrorHandler } = require("express-error-bouncer");
 const {  decode: decodeToken } = require('../helpers/jwt')
+const User = require('../data/models/users')
+
 const validateUser = (req, res, next) => {
   try {
     const { username, password } = req.body;
@@ -12,7 +14,7 @@ const validateUser = (req, res, next) => {
   }
 };
 
-const isAuthenticated = (req, res, next) => {
+const isAuthenticated = async (req, res, next) => {
   try {
     const { authorization: token  } = req.headers;
   
@@ -23,6 +25,8 @@ const isAuthenticated = (req, res, next) => {
     if (!_uuid) {
       throw new ErrorHandler(401, 'You shall not pass')
     }
+    const user = await User.find({id: _uuid});
+    req.user = user
     next()
   } catch (error) {
     next(error)

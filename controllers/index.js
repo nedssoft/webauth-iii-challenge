@@ -44,7 +44,7 @@ const loginUser = async (req, res, next) => {
 
 const getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.getUsers();
+    const users = await User.getUsers(req.user.department);
     return res.status(200).json({
       users,
     });

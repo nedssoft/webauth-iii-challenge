@@ -17,7 +17,7 @@ const find = async userData => {
   try {
     const [key] = Object.keys(userData);
     const [value] = Object.values(userData);
-    const user = await db("users").where({ [key] : value}).first();
+    const user = await db("users").where({ [key] : value}).select('id', 'username', 'department').first();
     if (!user) {
       throw new ErrorHandler(404, "User not found");
     }
@@ -27,9 +27,9 @@ const find = async userData => {
   }
 };
 
-const getUsers = () => {
+const getUsers = (dept) => {
   try {
-    return db('users').select('id', 'username', 'department');
+    return db('users').where('department', dept).select('id', 'username', 'department');
   } catch (error) {
     throw new ErrorHandler(500, error.message);
   }
