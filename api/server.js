@@ -2,8 +2,6 @@ const express = require("express");
 const { bouncer } = require("express-error-bouncer");
 const routes = require("../routes");
 
-require("dotenv").config();
-
 const app = express();
 
 app.use(express.json());

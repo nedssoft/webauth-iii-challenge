@@ -2,6 +2,10 @@ const jwt = require('jsonwebtoken')
 const { ErrorHandler } = require('express-error-bouncer')
 const { jwtSecret } = require('../config/secret')
 
+console.log(jwtSecret);
+
+
+
 const encode = (payload) => {
   try {
     return jwt.sign(payload, jwtSecret, {expiresIn: '3h'});
