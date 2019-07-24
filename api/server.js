@@ -1,15 +1,17 @@
-const express = require('express')
-const { bouncer } = require('express-error-bouncer')
-const routes = require('../routes')
+const express = require("express");
+const { bouncer } = require("express-error-bouncer");
+const routes = require("../routes");
 
-const app = express()
+require("dotenv").config();
 
-app.use(express.json())
+const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello API')
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello API");
 });
 
-app.use('/api', routes)
-app.use(bouncer)
-module.exports = app
+app.use("/api", routes);
+app.use(bouncer);
+module.exports = app;
